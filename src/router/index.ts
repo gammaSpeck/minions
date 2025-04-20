@@ -10,7 +10,7 @@ const routes: Readonly<RouteRecordRaw[]> = [
     component: HomePage,
   },
   {
-    path: "/bill-splitter",
+    path: "/tools/bill-splitter",
     name: "BillSplitter",
     component: BillSplitterPage,
   },

@@ -255,19 +255,23 @@ async function generatePDF(): Promise<void> {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 p-4 md:p-8 flex flex-col items-center">
-    <div class="w-full max-w-4xl bg-white shadow-md rounded-lg p-6">
+  <div
+    class="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-50 to-blue-50 p-4 sm:p-6 md:p-8 flex flex-col items-center"
+  >
+    <div class="w-full max-w-5xl bg-white shadow-xl rounded-lg p-6 md:p-8">
       <router-link
         to="/"
-        class="text-blue-600 hover:underline mb-6 inline-block"
+        class="text-blue-600 hover:text-blue-800 hover:underline mb-6 inline-block font-semibold"
       >
         &larr; Back to Home
       </router-link>
-      <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">
+      <h1
+        class="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-8 md:mb-10"
+      >
         Residence Bill Splitter
       </h1>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
         <!-- Use BillSplitterForm Component -->
         <BillSplitterForm
           v-model:totalBill="totalBill"
@@ -279,7 +283,7 @@ async function generatePDF(): Promise<void> {
         />
 
         <!-- Right Side: Illustration and Results Components -->
-        <div>
+        <div class="space-y-6 md:space-y-8">
           <!-- Use BillSplitterIllustration Component -->
           <BillSplitterIllustration
             ref="illustrationComponentRef"
