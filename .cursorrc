@@ -1,0 +1,192 @@
+{
+  "editor": {
+    "formatOnSave": true,
+    "defaultFormatter": "prettier",
+    "tabSize": 2,
+    "insertSpaces": true,
+    "rulers": [100],
+    "wordWrap": "off",
+    "trimTrailingWhitespace": true,
+    "insertFinalNewline": true
+  },
+  "typescript": {
+    "target": "ES2023",
+    "module": "ESNext",
+    "strict": true,
+    "useDefineForClassFields": true,
+    "isolatedModules": true,
+    "preserveValueImports": true,
+    "verbatimModuleSyntax": true,
+    "preferTypeOverInterface": true,
+    "snippets": {
+      "vue-component": {
+        "prefix": "vue",
+        "body": [
+          "<script setup lang=\"ts\">",
+          "type Props = {",
+          "  $1",
+          "};",
+          "",
+          "const props = defineProps<Props>();",
+          "</script>",
+          "",
+          "<template>",
+          "  <div>$2</div>",
+          "</template>"
+        ]
+      }
+    }
+  },
+  "vue": {
+    "scriptSetup": true,
+    "typescript": true,
+    "functionSyntax": "function",
+    "compositionApi": true,
+    "defineProps": "type-based",
+    "defineEmits": "type-based",
+    "suggestImports": true
+  },
+  "javascript": {
+    "suggest": {
+      "completeFunctionCalls": true,
+      "enabled": true,
+      "includeCompletionsForModuleExports": true
+    }
+  },
+  "formatting": {
+    "semi": true,
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 100,
+    "endOfLine": "lf"
+  },
+  "lint": {
+    "recommended": true,
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "error",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unused-vars": "error",
+      "@typescript-eslint/prefer-promise-reject-errors": "error",
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/await-thenable": "error",
+      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/promise-function-async": "error",
+      "@typescript-eslint/prefer-type-over-interface": "error",
+      "vue/component-api-style": ["error", ["script-setup"]],
+      "vue/component-definition-name-casing": ["error", "PascalCase"],
+      "vue/no-setup-props-destructure": "error",
+      "vue/no-deprecated-slot-attribute": "error",
+      "vue/no-deprecated-v-on-native-modifier": "error",
+      "vue/valid-define-props": "error",
+      "vue/valid-define-emits": "error",
+      "vue/no-arrow-functions-in-watch": "error",
+      "vue/prefer-import-from-vue": "error",
+      "vue/no-deprecated-filter": "error",
+      "vue/no-deprecated-v-bind-sync": "error",
+      "vue/require-explicit-emits": "error",
+      "vue/script-setup-uses-vars": "error"
+    }
+  },
+  "eslint": {
+    "rules": {
+      "@typescript-eslint/prefer-type-over-interface": "error",
+      "@typescript-eslint/explicit-function-return-type": "error",
+      "@typescript-eslint/await-thenable": "error",
+      "@typescript-eslint/no-floating-promises": "error",
+      "@typescript-eslint/promise-function-async": "error",
+      "@typescript-eslint/no-misused-promises": "error",
+      "@typescript-eslint/prefer-promise-reject-errors": "error",
+      "max-depth": ["error", 2],
+      "complexity": ["error", { "max": 5 }],
+      "no-else-return": ["error", { "allowElseIf": false }],
+      "early-return/early-return": "error",
+      "max-nested-callbacks": ["error", 2],
+      "max-statements-per-line": ["error", { "max": 1 }]
+    },
+    "plugins": ["early-return"],
+    "snippets": {
+      "guard-async-function": {
+        "prefix": "gfn",
+        "body": [
+          "async function $1($2): Promise<$3> {",
+          "  if (!$4) return;",
+          "",
+          "  try {",
+          "    $5",
+          "  } catch (error) {",
+          "    console.error('$1 error:', error);",
+          "    throw error;",
+          "  }",
+          "}"
+        ]
+      },
+      "guard-if": {
+        "prefix": "gif",
+        "body": [
+          "if (!$1) return $2;",
+          "",
+          "$3"
+        ]
+      },
+      "guard-map": {
+        "prefix": "gmap",
+        "body": [
+          "return items.map(item => {",
+          "  if (!item.$1) return null;",
+          "",
+          "  return {",
+          "    $2",
+          "  };",
+          "}).filter(Boolean);"
+        ]
+      }
+    }
+  },
+  "suggestions": {
+    "patterns": {
+      "if-else-pattern": {
+        "find": "if ($1) {\n  $2\n} else {\n  $3\n}",
+        "replace": "if (!$1) {\n  $3\n  return;\n}\n\n$2",
+        "description": "Convert if-else to guard clause"
+      },
+      "nested-if-pattern": {
+        "find": "if ($1) {\n  if ($2) {\n    $3\n  }\n}",
+        "replace": "if (!$1) return;\nif (!$2) return;\n\n$3",
+        "description": "Convert nested if to guard clauses"
+      },
+      "early-continue-pattern": {
+        "find": "for (const $1 of $2) {\n  if ($3) {\n    $4\n  }\n}",
+        "replace": "for (const $1 of $2) {\n  if (!$3) continue;\n\n  $4\n}",
+        "description": "Convert if in loop to early continue"
+      }
+    },
+    "examples": [
+      {
+        "title": "Guard Clause Example",
+        "code": [
+          "function processUser(user: User): void {",
+          "  if (!user.isActive) return;",
+          "  if (!user.hasPermission) return;",
+          "",
+          "  // Process active user with permission",
+          "  processActiveUser(user);",
+          "}"
+        ]
+      },
+      {
+        "title": "Early Continue Example",
+        "code": [
+          "for (const item of items) {",
+          "  if (!item.isValid) continue;",
+          "  if (!item.isReady) continue;",
+          "",
+          "  // Process valid and ready item",
+          "  processItem(item);",
+          "}"
+        ]
+      }
+    ]
+  }
+}
